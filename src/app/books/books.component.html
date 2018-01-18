@@ -1,0 +1,9 @@
+<ul>
+  <li *ngFor="let book of books | async"> {{book | json}}</li>
+</ul>
+
+<hr>
+
+<ul>
+  <li *ngFor="let book of allBooks"> Book title: {{book.title}}</li>
+</ul>
