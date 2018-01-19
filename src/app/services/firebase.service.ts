@@ -14,11 +14,16 @@ export class FirebaseService {
     return this.books;
   }
 
-  getFavoriteBooks() {
-    this.favoriteBooks = this.db.list('/books').map(books => {
-      const topRateBooks = books.filter(item => item.rate > 4);
-      return topRateBooks;
-    })
+  getFavoriteBooks(): Observable<any> {
+    return  new Observable((observer) => {
+      this.db.list('/books')
+      .query
+      .orderByChild('rate')
+      .startAt(4)
+      .once('value', (data) => {
+        observer.next(data.val());
+      });
+    });
   }
 
 }

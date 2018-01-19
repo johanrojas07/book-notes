@@ -13,9 +13,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.firebaseService.getFavoriteBooks().subscribe(favBooks => {
-      this.favoriteBooks = favBooks;
+      const array = Object.keys(favBooks).map(function(k) {
+        return favBooks[k];
+      });
+      this.favoriteBooks = array;
       console.log(this.favoriteBooks);
-    })
+    });
   }
 
 }
